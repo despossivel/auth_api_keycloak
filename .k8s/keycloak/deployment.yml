@@ -22,17 +22,17 @@ spec:
             - name: KEYCLOAK_ADMIN
               value: "auth"
             - name: KEYCLOAK_ADMIN_PASSWORD
-              value: "auth@123speaker"
+              value: "auth@123"
             - name: KC_PROXY
               value: "edge"
             - name: KC_DB
               value: "postgres"
             - name: KC_DB_URL
-              value: "jdbc:postgresql://k4d9g7k7kk.r0dxlscunm.tsdb.cloud.timescale.com:34495/tsdb"
+              value: "jdbc:postgresql://db:34495/keycloak"
             - name: KC_DB_USERNAME
-              value: "tsdbadmin"
+              value: "postgres"
             - name: KC_DB_PASSWORD
-              value: "sbceim567mjf8f6u"
+              value: "root"
             - name: PROXY_ADDRESS_FORWARDING
               value: "true"
             - name: KC_HOSTNAME
@@ -48,10 +48,3 @@ spec:
             httpGet:
               path: /realms/master
               port: 8080
-          # volumeMounts:
-          #   - name: keycloak-themes-custom
-          #     mountPath: /opt/keycloak/themes/keycloakify-starter
-      # volumes:
-      #   - name: keycloak-themes-custom
-      #     persistentVolumeClaim:
-      #       claimName: keycloak-themes-custom

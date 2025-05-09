@@ -1,4 +1,4 @@
-FROM  --platform=linux/amd64 node:23-alpine
+FROM  --platform=linux/amd64 node:23-slim
 WORKDIR /usr/authapi
 COPY package.json .
 RUN npm i

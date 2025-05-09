@@ -8,9 +8,7 @@ import KeycloakAPI from "../services/keycloak.js"
 
 const keycloak = new KeycloakAPI()
 
-function handleRequestError(res, error) {
-    res.status(error.response.status).json(error.response.data);
-}
+const handleRequestError = (res, error) => res.status(error.response.status).json(error.response.data);
 
 
 async function auth(req, res) {
@@ -19,14 +17,13 @@ async function auth(req, res) {
     try {
         const response = await keycloak.auth(req.body);
 
-        const { name, given_name,  family_name,preferred_username, email, email_verified, username, active, sub } = await keycloak.userInspect({
+        const { name, given_name, family_name, preferred_username, email, email_verified, username, active, sub } = await keycloak.userInspect({
             token: response.access_token,
             realm: process.env.OIDC_REALM
         })
-      
-        response.user = {name, given_name,  family_name,preferred_username, email, email_verified, username, active, sub }
 
-        
+        response.user = { name, given_name, family_name, preferred_username, email, email_verified, username, active, sub }
+
         res.json(response);
     } catch (error) {
         return handleRequestError(res, error)
