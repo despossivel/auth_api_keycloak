@@ -1,0 +1,32 @@
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: postgres-volume
+#   labels:
+#     type: local
+#     app: postgres
+# spec:
+#   # storageClassName: manual
+#   capacity:
+#     storage: 40Gi
+#   accessModes:
+#     - ReadWriteMany
+#   hostPath:
+#     path: /data/postgresql
+
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-volume
+spec:
+  capacity:
+    storage: 40Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: vultr-block-storage
+  csi:
+    driver: block.csi.vultr.com
+    volumeHandle: fra-a1fd78fe572242
+

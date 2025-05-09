@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: quay.io/keycloak/keycloak:22.0.1
+          args: ["start", "--proxy=edge"]
+          env:
+            - name: KEYCLOAK_ADMIN
+              value: "auth"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "auth@123speaker"
+            - name: KC_PROXY
+              value: "edge"
+            - name: KC_DB
+              value: "postgres"
+            - name: KC_DB_URL
+              value: "jdbc:postgresql://k4d9g7k7kk.r0dxlscunm.tsdb.cloud.timescale.com:34495/tsdb"
+            - name: KC_DB_USERNAME
+              value: "tsdbadmin"
+            - name: KC_DB_PASSWORD
+              value: "sbceim567mjf8f6u"
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+            - name: KC_HOSTNAME
+              value: auth.com
+            - name: KC_HOSTNAME_STRICT_HTTPS
+              value: "false"
+            - name: KC_HOSTNAME_STRICT
+              value: "false"
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /realms/master
+              port: 8080
+          # volumeMounts:
+          #   - name: keycloak-themes-custom
+          #     mountPath: /opt/keycloak/themes/keycloakify-starter
+      # volumes:
+      #   - name: keycloak-themes-custom
+      #     persistentVolumeClaim:
+      #       claimName: keycloak-themes-custom

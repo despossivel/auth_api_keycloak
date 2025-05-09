@@ -1,0 +1,10 @@
+{
+  "realm": "authapi",
+  "auth-server-url": "http://localhost:8080/",
+  "ssl-required": "none",
+  "resource": "auth-api",
+  "credentials": {
+    "secret": "Y7OFBzhM5D9UMCTU7URCEy3MvoqtyQXZ"
+  },
+  "confidential-port": 0
+}

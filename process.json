@@ -1,0 +1,9 @@
+{
+    "script": "index.js",
+    "watch": true,
+    "ignore_watch": [
+        "./.git",
+        "./node_modules"
+    ],
+    "name": "authapi"
+}

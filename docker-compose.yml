@@ -1,0 +1,22 @@
+version: "2"
+services:
+  authapi:
+    build: .
+    environment:
+      - PORT=3008
+      - NODE_ENV=dev
+      - REALM_ADMIN=master
+      - REALM=authapi
+      - ADMIN_USER=authapi
+      - ADMIN_PASSWORD=demo
+      - OIDC_RESOURCE=auth-api
+      - OIDC_AUTH_SERVER_URL=http://localhost:8000/
+      - OIDC_REALM=authapi
+      - OIDC_SECRET=VLdJMv9TToa0EmcX7T6ATYSsjFssWX7S
+    command: pm2-runtime process.json
+    volumes:
+      - .:/usr/api
+      - /usr/authapi/node_modules
+    ports:
+      - "3008:3008"
+    container_name: authapi
